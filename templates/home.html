@@ -43,9 +43,10 @@ function getMovies() {
   $.ajax({
     url: '/generate_descriptions',
     type: 'GET',
-    success: function(data) {
-      // Assuming the data is an array of descriptions
-      // ['Description 1', 'Description 2', 'Description 3', 'Description 4']
+    success: function(response) {
+      // Assuming the response contains a key 'blind_descriptions'
+      // that is an array of descriptions
+      var data = response.blind_descriptions;
       if(data && data.length === 4) {
         for(var i = 0; i < data.length; i++) {
           document.getElementById('rectangle-' + i).textContent = data[i];

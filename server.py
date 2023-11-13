@@ -8,6 +8,7 @@ import random
 import requests
 
 
+
 #for gpt
 import openai
 
@@ -159,7 +160,8 @@ def get_random_descriptions():
         links.append(get_link(movie_id))
         
     # return blind_descriptions, links
-    return blind_descriptions
+    response = jsonify(blind_descriptions=blind_descriptions, links=links)
+    return response
 
     
 
