@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blind Date with a Movie</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f7f7f7;
+  }
+  .title-container {
+    margin-bottom: 20px;
+  }
+  .button-container {
+    margin-bottom: 20px;
+  }
+  .rectangle-container {
+    display: flex;
+  }
+  .rectangle {
+    width: 200;
+    height: 250px;
+    margin: 10px;
+    border: 2px solid #333;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function getMovies() {
+  $.ajax({
+    url: '/generate_descriptions',
+    type: 'GET',
+    success: function(data) {
+      // Assuming the data is an array of descriptions
+      // ['Description 1', 'Description 2', 'Description 3', 'Description 4']
+      if(data && data.length === 4) {
+        for(var i = 0; i < data.length; i++) {
+          document.getElementById('rectangle-' + i).textContent = data[i];
+        }
+      }
+    },
+    error: function(error) {
+      console.log('Error:', error);
+    }
+  });
+}
+</script>
+</head>
+<body>
+
+<div class="title-container">
+  <h1>Blind Date with a Movie</h1>
+</div>
+
+<div class="button-container">
+  <button onclick="getMovies()">Get Movies</button>
+</div>
+
+<div class="rectangle-container">
+  <div class="rectangle" id="rectangle-0">Movie description will appear here</div>
+  <div class="rectangle" id="rectangle-1">Movie description will appear here</div>
+  <div class="rectangle" id="rectangle-2">Movie description will appear here</div>
+  <div class="rectangle" id="rectangle-3">Movie description will appear here</div>
+</div>
+
+</body>
+</html>
