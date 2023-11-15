@@ -1,80 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blind Date with a Movie</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f7f7f7;
-  }
-  .title-container {
-    margin-bottom: 20px;
-  }
-  .button-container {
-    margin-bottom: 20px;
-  }
-  .rectangle-container {
-    display: flex;
-  }
-  .rectangle {
-    width: 200;
-    height: 250px;
-    margin: 10px;
-    border: 2px solid #333;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-  }
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-function getMovies() {
-  $.ajax({
-    url: '/generate_descriptions',
-    type: 'GET',
-    success: function(response) {
-      // Assuming the response contains a key 'blind_descriptions'
-      // that is an array of descriptions
-      var data = response.blind_descriptions;
-      if(data && data.length === 4) {
-        for(var i = 0; i < data.length; i++) {
-          document.getElementById('rectangle-' + i).textContent = data[i];
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blind Date with a Movie</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f7f7f7;
         }
-      }
-    },
-    error: function(error) {
-      console.log('Error:', error);
-    }
-  });
-}
-</script>
+        .title-container {
+            margin-bottom: 20px;
+        }
+        .button-container {
+            margin-bottom: 20px;
+        }
+        .rectangle-container {
+            display: none; /* Initially hide the rectangle container */
+            width: 80%;
+            /* flex-wrap: wrap; */
+            justify-content: center;
+        }
+        .rectangle-container a {
+            width: calc(25% - 15px);
+            margin: 15px;
+            text-decoration: none;
+            color: black;
+        }
+        .rectangle {
+            width: 100%;
+            height: 250px;
+            border: 2px solid #333;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function getMovies() {
+            $.ajax({
+                url: '/generate_descriptions',
+                type: 'GET',
+                success: function(response) {
+                    var descriptions = response.blind_descriptions;
+                    var links = response.links;
+                    var container = document.querySelector('.rectangle-container');
+                    container.style.display = 'flex'; // Show the rectangle container
+
+                    if(descriptions && descriptions.length === 4) {
+                        for(var i = 0; i < descriptions.length; i++) {
+                            var linkElement = document.getElementById('link-' + i);
+                            linkElement.innerHTML = '<div class="rectangle">' + descriptions[i] + '</div>';
+                            if(links && links[i]) {
+                                linkElement.href = links[i];
+                                linkElement.target = '_blank';
+                            }
+                        }
+                    }
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 
 <div class="title-container">
-  <h1>Blind Date with a Movie</h1>
+    <h1>Blind Date with a Movie</h1>
 </div>
 
 <div class="button-container">
-  <button onclick="getMovies()">Get Movies</button>
+    <button onclick="getMovies()">Get Movies</button>
 </div>
 
 <div class="rectangle-container">
-  <div class="rectangle" id="rectangle-0">Movie description will appear here</div>
-  <div class="rectangle" id="rectangle-1">Movie description will appear here</div>
-  <div class="rectangle" id="rectangle-2">Movie description will appear here</div>
-  <div class="rectangle" id="rectangle-3">Movie description will appear here</div>
+    <a href="#" id="link-0" target="_blank"><div class="rectangle">?</div></a>
+    <a href="#" id="link-1" target="_blank"><div class="rectangle">?</div></a>
+    <a href="#" id="link-2" target="_blank"><div class="rectangle">?</div></a>
+    <a href="#" id="link-3" target="_blank"><div class="rectangle">?</div></a>
 </div>
 
 </body>
