@@ -129,6 +129,8 @@ def generate_description(movie_id, choice):
             
         if len(response) == 0:
             response = generate_description(movie_id, choice=1)
+        else:
+            response = response[:-2]
         
     response = response.replace('\n','')
 
