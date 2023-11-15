@@ -70,7 +70,7 @@ def generate_description(movie_id, choice):
         text += overall_data['overview']
         if choice == 1:
             prompt = f"generate a 'blind date with a book' description for this movie:\
-                    \n\n{text}\n\n keep the description to maximum 15 words. Do NOT mention the movie's title."
+                    \n\n{text}\n\n keep the description to maximum 10 words. Do NOT mention the movie's title."
 
             response = openai.Completion.create(
                 engine="text-davinci-003",
@@ -85,7 +85,7 @@ def generate_description(movie_id, choice):
             actors = credits_data['cast'][0]['name'] + " and " + credits_data['cast'][1]['name'] 
             prompt = f"generate a very short description for this movie:\
                     \n\n{text}\n\n Do NOT mention the movie's title. Make sure to mention BOTH {actors} with their full names.\
-                    Keep the description to maximum 15 words. "
+                    Keep the description to maximum 10 words. "
 
             response = openai.Completion.create(
                 engine = "text-davinci-003",
@@ -141,8 +141,12 @@ def get_link(movie_id):
     if "US" in response_data['results']:
         link = response_data['results']['US']['link']
     else:
-        random_country_code = random.choice(list(response_data['results'].keys()))
-        link = response_data['results'][random_country_code]['link']
+        try:
+            random_country_code = random.choice(list(response_data['results'].keys()))
+            link = response_data['results'][random_country_code]['link']
+        except:
+            print(movie_id)
+            link = 'google.com'
     
     return link
 
