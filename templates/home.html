@@ -1,97 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Blind Date with a Movie</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f7f7f7;
-        }
-        .title-container {
-            margin-bottom: 20px;
-        }
-        .button-container {
-            margin-bottom: 20px;
-        }
-        .rectangle-container {
-            display: none; /* Initially hide the rectangle container */
-            width: 80%;
-            /* flex-wrap: wrap; */
-            justify-content: center;
-        }
-        .rectangle-container a {
-            width: calc(25% - 15px);
-            margin: 15px;
-            text-decoration: none;
-            color: black;
-        }
-        .rectangle {
-            width: 100%;
-            height: 250px;
-            border: 2px solid #333;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            overflow: hidden;
-            padding: 5px;
-        }
-    </style>
+    <meta name="description" content="movie recommendations made fun" />
+
+    <!--Inter UI font-->
+    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
+
+    <!--vendors styles-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
+    <!-- Bootstrap CSS / Color Scheme -->
+    <link rel="stylesheet" href="../static/default.css" id="theme-color">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        function getMovies() {
+        function getMovies(mainstream) {
+            document.getElementById('content-container').style.display = 'none';
+            document.getElementById('movies-container').style.display = 'none';
+            document.getElementById('loading-overlay').style.display = 'flex';
+
+
             $.ajax({
-                url: '/generate_descriptions',
+                url: '/generate_descriptions?mainstream=' + mainstream,
                 type: 'GET',
-                success: function(response) {
+                success: function (response) {
                     var descriptions = response.blind_descriptions;
                     var links = response.links;
-                    var container = document.querySelector('.rectangle-container');
-                    container.style.display = 'flex'; // Show the rectangle container
+                    document.getElementById('content-container').style.display = 'none';
+                    document.getElementById('loading-overlay').style.display = 'none';
+                    document.getElementById('movies-container').style.display = 'flex';
 
-                    if(descriptions && descriptions.length === 4) {
-                        for(var i = 0; i < descriptions.length; i++) {
-                            var linkElement = document.getElementById('link-' + i);
-                            linkElement.innerHTML = '<div class="rectangle">' + descriptions[i] + '</div>';
-                            if(links && links[i]) {
-                                linkElement.href = links[i];
-                                linkElement.target = '_blank';
-                            }
+
+
+
+                    if (descriptions && descriptions.length === 4) {
+                        for (var i = 0; i < descriptions.length; i++) {
+                            var card = document.getElementById('card-' + i);
+                            var descriptionElement = card.getElementsByClassName('movie-description')[0]; // Get the h5 element
+                            descriptionElement.textContent = descriptions[i]; // Update text content
+                            card.parentElement.href = links[i];
+                            card.parentElement.target = '_blank';
                         }
                     }
                 },
-                error: function(error) {
+                error: function (error) {
+                    document.getElementById('content-container').style.display = 'block';
+                    document.getElementById('loading-overlay').style.display = 'none';
+                    document.getElementById('movies-container').style.display = 'none';
+
+
                     console.log('Error:', error);
                 }
             });
         }
     </script>
+
+
+
 </head>
+
 <body>
+    <!--hero header-->
+    <section class="py-7 py-md-0 bg-hero" id="home">
+        <div class="container">
+            <div class="row vh-md-100">
+                <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+                    <h1 class="heading-black text-capitalize">Blind Date with a Movie</h1>
+                    <p class="lead py-3">Can’t pick a movie? I can help.
+                        I’ll give you a few random movies, but you won’t get to see their names or posters til you click
+                        on them.
+                        <br> Don't judge a movie by its poster :)
+                    </p>
+                    <button class="btn btn-primary d-inline-flex flex-row align-items-center">
+                        <a class="nav-link page-scroll" href="#pick">Give me a movie</a>
+                    </button>
 
-<div class="title-container">
-    <h1>Blind Date with a Movie</h1>
-</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="button-container">
-    <button onclick="getMovies()">Get Movies</button>
-</div>
+    <!-- features section -->
+    <section class="py-7 py-md-0 bg-hero" id="pick">
+        <div class="container">
+            <div id="content-container">
+                <div class="row vh-md-100">
+                    <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+                        <h2 class="heading-black">What are you in the mood for?</h2>
+                        <button onclick="getMovies(1)" class="btn btn-primary mr-5">mainstream</button>
+                        <button onclick="getMovies(0)" class="btn btn-primary ml-5">surprise me!</button>
+                    </div>
+                </div>
+            </div>
 
-<div class="rectangle-container">
-    <a href="#" id="link-0" target="_blank"><div class="rectangle">?</div></a>
-    <a href="#" id="link-1" target="_blank"><div class="rectangle">?</div></a>
-    <a href="#" id="link-2" target="_blank"><div class="rectangle">?</div></a>
-    <a href="#" id="link-3" target="_blank"><div class="rectangle">?</div></a>
-</div>
+            <div id="loading-overlay" style="display:none">
+                <div class="row vh-md-100">
+                    <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+                        <div class="loader">
+                            <div class="cell d-0"></div>
+                            <div class="cell d-1"></div>
+                            <div class="cell d-2"></div>
 
+                            <div class="cell d-1"></div>
+                            <div class="cell d-2"></div>
+
+                            <div class="cell d-2"></div>
+                            <div class="cell d-3"></div>
+
+                            <div class="cell d-3"></div>
+                            <div class="cell d-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="movies-container" style="display:none">
+                <div class="row vh-md-100">
+                    <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+                        <h2 class="heading-black">Get more movies!</h2>
+                        <button onclick="getMovies(1)" class="btn btn-primary mr-4">mainstream</button>
+                        <button onclick="getMovies(0)" class="btn btn-primary ml-4">surprise me!</button>
+                    </div>
+
+                    <div class="container d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="#" id="link-0" target="_blank">
+                                    <div class="card" id="card-0">
+                                        <div class="card2">
+                                            <h6 class="movie-description"></h6>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="#" id="link-1" target="_blank">
+                                    <div class="card" id="card-1">
+                                        <div class="card2">
+                                            <h6 class="movie-description"></h6>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="#" id="link-2" target="_blank">
+                                    <div class="card" id="card-2">
+                                        <div class="card2">
+                                            <h6 class="movie-description"></h6>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="#" id="link-3" target="_blank">
+                                    <div class="card" id="card-3">
+                                        <div class="card2">
+                                            <h6 class="movie-description"></h6>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- 
+    <section class="py-7 py-md-0 bg-hero" id="rectangle-container">
+        <div class="container">
+            <div class="row vh-md-100">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="#" id="link-0" target="_blank">
+                        <div class="card" id="card-0">
+                            <div class="card2">
+                                <h6 class="movie-description"></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+    
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="#" id="link-1" target="_blank">
+                        <div class="card" id="card-1">
+                            <div class="card2">
+                                <h6 class="movie-description"></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+    
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="#" id="link-2" target="_blank">
+                        <div class="card" id="card-2">
+                            <div class="card2">
+                                <h6 class="movie-description"></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+    
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="#" id="link-3" target="_blank">
+                        <div class="card" id="card-3">
+                            <div class="card2">
+                                <h6 class="movie-description"></h6>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+
+    <!--scroll to top-->
+    <div class="scroll-top">
+        <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="../static/scripts.js"></script>
 </body>
+
 </html>
