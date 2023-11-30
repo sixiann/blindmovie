@@ -21,18 +21,25 @@ headers = {
 }
 
 
-def get_movies(n):
+def get_movies(n, mainstream):
     """
     return a list of n movie_ids
     """
+
     #randomize between popular and top rated 
     option = random.randint(1,2)
     
     if option == 1: #top rated
-        page = random.randint(1, 447)
+        if mainstream == "1": 
+            page = random.randint(1,50)
+        else:
+            page = random.randint(51, 447)
         url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page="+str(page)
     else: #popular
-        page = random.randint(1, 500)
+        if mainstream == "1": 
+            page = random.randint(1,50)
+        else:
+            page = random.randint(51, 500)
         url = "https://api.themoviedb.org/3/movie/popular?language=en-US&page="+str(page)
         
     response = requests.get(url, headers=headers)
@@ -147,14 +154,18 @@ def get_link(movie_id):
             random_country_code = random.choice(list(response_data['results'].keys()))
             link = response_data['results'][random_country_code]['link']
         except:
-            print(movie_id)
-            link = 'google.com'
-    
+            url = "https://api.themoviedb.org/3/movie/"+movie_id+"?language=en-US"
+            response = requests.get(url, headers=headers)
+            response_data = json.loads(response.text)
+            original_title = response_data['original_title']
+            link = f'https://www.google.com/search?q={original_title}%20movie'
     return link
 
 @app.route('/generate_descriptions', methods=['GET'])
 def get_random_descriptions():
-    movie_ids = get_movies(4)
+    mainstream = request.args.get('mainstream', 1, type=int)  # Default to 1 if not specified
+    movie_ids = get_movies(4, mainstream)
+   
     
     choices = [1, 2, 3, 4]
     random_choices = random.sample(choices, len(choices))
@@ -167,6 +178,7 @@ def get_random_descriptions():
         
     # return blind_descriptions, links
     response = jsonify(blind_descriptions=blind_descriptions, links=links)
+    print(blind_descriptions)
     return response
 
     
