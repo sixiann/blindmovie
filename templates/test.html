@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Blind Date with a Movie</title>
+    <meta name="description" content="movie recommendations made fun" />
+
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Playpen+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+    <!--Inter UI font-->
+    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
+
+    <!--vendors styles-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
+    <!-- Bootstrap CSS / Color Scheme -->
+    <link rel="stylesheet" href="../static/default2.css" id="theme-color">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function getMovies() {
+            $.ajax({
+                url: '/generate_descriptions',
+                type: 'GET',
+                success: function(response) {
+                    var descriptions = response.blind_descriptions;
+                    var links = response.links;
+                    var container = document.querySelector('.rectangle-container');
+                    container.style.display = 'flex'; // Show the rectangle container
+
+                    if(descriptions && descriptions.length === 4) {
+                        for(var i = 0; i < descriptions.length; i++) {
+                            var linkElement = document.getElementById('link-' + i);
+                            linkElement.innerHTML = '<div class="rectangle">' + descriptions[i] + '</div>';
+                            if(links && links[i]) {
+                                linkElement.href = links[i];
+                                linkElement.target = '_blank';
+                            }
+                        }
+                    }
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+
+<section class="py-7 py-md-0" id="home">
+<div class="title-container">
+    <img src="../static/movielogo.png" alt="Book Image"> 
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="row">
+        <div class = "mr-3">
+            <div class="book">
+                <img src="https://lumiere-a.akamaihd.net/v1/images/p_avengersendgame_19751_e14a0104.jpeg" alt="Book Image"> 
+                <div class="cover">
+                    <p class="ml-2">Surviving heroes unite, rising from ruins to restore universal order
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class = "mr-3">
+            <div class="book">
+                <img src="https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" alt="Book Image"> 
+                <div class="cover">
+                    <p class="ml-2">Cillian Murphy and Emily Blunt depict the tumultuous journey of atomic bomb creator, J. Robert Oppenheimer.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class = "mr-3">
+            <div class="book">
+                <img src="https://i.ebayimg.com/images/g/1EcAAOSwa-9klig5/s-l1600.jpg" alt="Book Image"> 
+                <div class="cover">
+                    <p class="ml-2">fantasy world, motherhood, satire, patriarchy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class = "mr-3">
+            <div class="book">
+                <img src="https://m.media-amazon.com/images/M/MV5BNDdhMzMxOTctNDMyNS00NTZmLTljNWEtNTc4MDBmZTYxY2NmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg" alt="Book Image"> 
+                <div class="cover">
+                    <p class="ml-2">Martial arts adventure unfolds in a whirlwind of love and secrets.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+
+
+
+
+<!-- <div class="button-container">
+    <button onclick="getMovies()">Get Movies</button>
+</div>
+
+<div class="rectangle-container">
+    <a href="#" id="link-0" target="_blank"><div class="rectangle">?</div></a>
+    <a href="#" id="link-1" target="_blank"><div class="rectangle">?</div></a>
+    <a href="#" id="link-2" target="_blank"><div class="rectangle">?</div></a>
+    <a href="#" id="link-3" target="_blank"><div class="rectangle">?</div></a>
+</div> -->
+
+</body>
+</html>
