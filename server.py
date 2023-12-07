@@ -10,10 +10,12 @@ import requests
 
 
 #for gpt
-import openai
-
+from openai import OpenAI
 import secrets2
-openai.api_key = secrets2.SECRET_KEY
+
+
+client = OpenAI(api_key=secrets2.SECRET_KEY)
+model = "gpt-3.5-turbo"
 
 headers = {
     "accept": "application/json",
@@ -55,7 +57,7 @@ def get_movies(n, mainstream):
 
 
 def generate_description(movie_id, choice):
-    
+
     #generic description based on genre, overview, reviews, tagline 
     if choice in [1,2]:
         text = ""
@@ -77,28 +79,30 @@ def generate_description(movie_id, choice):
         text += overall_data['overview']
         if choice == 1:
             prompt = f"generate a 'blind date with a book' description for this movie:\
-                    \n\n{text}\n\n keep the description to maximum 10 words. Do NOT mention the movie's title."
+                    \n\n{text}\n\n keep the description to maximum 10 words!!! Do NOT mention the movie's title."
 
-            response = openai.Completion.create(
-                engine="text-davinci-003",
-                prompt=prompt,
-                max_tokens=256
-            )["choices"][0]["text"]
+            messages = [{"role": "user", "content": prompt}]
+
+            response = client.chat.completions.create(model=model,
+            messages=messages,
+            max_tokens=100).choices[0].message.content
+
+
         else:
             url = "https://api.themoviedb.org/3/movie/"+ movie_id + "/credits?language=en-US"
 
             credits_response = requests.get(url, headers = headers)
             credits_data = json.loads(credits_response.text)
             actors = credits_data['cast'][0]['name'] + " and " + credits_data['cast'][1]['name'] 
-            prompt = f"generate a very short description for this movie:\
+            prompt = f"generate a short description for this movie:\
                     \n\n{text}\n\n Do NOT mention the movie's title. Make sure to mention BOTH {actors} with their full names.\
                     Keep the description to maximum 10 words. "
 
-            response = openai.Completion.create(
-                engine = "text-davinci-003",
-                prompt = prompt,
-                max_tokens=256
-            )["choices"][0]["text"]
+            messages = [{"role": "user", "content": prompt}]
+
+            response = client.chat.completions.create(model=model,
+            messages=messages,
+            max_tokens=100).choices[0].message.content
     
     
     #description based on movie recommendation 
@@ -139,7 +143,7 @@ def generate_description(movie_id, choice):
         else:
             response = response[:-2]
         
-    response = response.replace('\n','')
+    # response = response.replace('\n','')
 
     return response
 
@@ -166,7 +170,6 @@ def get_random_descriptions():
     mainstream = request.args.get('mainstream', 1, type=int)  # Default to 1 if not specified
     movie_ids = get_movies(4, mainstream)
    
-    
     choices = [1, 2, 3, 4]
     random_choices = random.sample(choices, len(choices))
     
@@ -185,12 +188,13 @@ def get_random_descriptions():
 
 @app.route('/')
 def home():
-    return render_template('home.html')   
+    return render_template('test.html')   
 
 
 if __name__ == '__main__':
     # app.run(debug = True, port = 4000)    
     app.run(debug = True)
+
 
 
 
