@@ -7422,6 +7422,15 @@ Custom CSS
   color: #000;
 }
 
+.book img {
+  border-radius: 10px;
+  width: 100%; /* Makes the image take the full width of the .book container */
+  height: 100%; 
+  object-fit: cover; /* Ensures the image covers the area without distorting */
+  overflow: hidden;
+}
+
+
 .cover {
   top: 0;
   position: absolute;
