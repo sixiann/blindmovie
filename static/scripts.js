@@ -12,7 +12,7 @@ $(function () {
         var $anchor = $(this);
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top - 20
-        }, 1000);
+        }, 800);
         event.preventDefault();
     });
 
@@ -57,7 +57,7 @@ $(function () {
     $('.scroll-top').click(function () {
         $('html, body').stop().animate({
             scrollTop: 0
-        }, 1000);
+        }, 500);
     });
 
     /**Theme switcher - DEMO PURPOSE ONLY */

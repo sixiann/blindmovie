@@ -83,6 +83,7 @@
   
   .mr-2,
   .mx-2 {
+    font-family: 'Playpen Sans', cursive;
     margin-right: 0.5rem !important; }
   
   .mb-2,
@@ -1848,12 +1849,115 @@
             .offset-md-11 {
               margin-left: 91.66667%; } }
 
+.justify-content-center {
+  -ms-flex-pack: center !important;
+      justify-content: center !important; }
 
 /* CUSTOMS */
 
 
-    
+.mypopcorn {
+  padding:20px;
+}
 
+.popcorn{
+  /* margin: auto;
+  position: absolute; */
+  width:200px;
+  /* top: 30%; 
+  left: 0; 
+  bottom: 0; 
+  right: 0; */
+}
+
+circle#popcrncirlce {
+  fill: #FFE477;
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -webkit-animation: rotate 1.5s cubic-bezier(.49,.05,.32,1.04) infinite alternate;
+  animation: rotate 1.5s cubic-bezier(.49,.05,.32,1.04) infinite alternate;
+}
+
+
+
+@-webkit-keyframes rotate {
+  50% {
+    -webkit-transform: translate(0px, 100px);
+  }
+}
+
+@keyframes rotate {
+  50% {
+    transform: translate(0px, 100px);
+  }
+}
+
+.bg-hero {
+  background-color: #ffffff;
+  background-color: #ffffff;
+  background-image: url('../static/curtains.png');
+  background-size: cover; /* Cover the entire space of the body */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-position: center;
+  /* background-attachment: fixed;
+  background-size: cover; */
+  position: relative; }
+  .bg-hero:before {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    content: "";
+    background-color: rgba(255, 255, 255, 0.7); }
+  .bg-hero .container {
+    z-index: 2;
+    position: relative; }
+    
+    .d-flex {
+      display: -ms-flexbox !important;
+      display: flex !important; }
+.bg-primary {
+  background-color: transparent !important; 
+  /* background-color: #ffffff; */
+  background-image: url('../static/curtains.png');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center;
+
+}
+
+.bg-secondary {
+  background-color: transparent !important; 
+  /* background-color: #ffffff; */
+  background-image: url('../static/redcarpet.png');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center;
+
+}
+    
+  .align-items-center {
+    -ms-flex-align: center !important;
+        align-items: center !important; }
+
+
+        .align-content-center {
+          -ms-flex-line-pack: center !important;
+              align-content: center !important; }
+              
+              
+
+  section {
+    min-height: 100vh; /* Set the minimum height to full viewport height */
+    width: 100%; /* Ensure it takes full width */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+}
 
 body {
     margin: 0;
@@ -1874,12 +1978,63 @@ body {
     display: flex;
     justify-content: center; /* Centers horizontally */
     align-items: center; /* Centers vertically */
+    flex-direction: column;
 }
+
+.title-container2 {
+  margin-bottom: 150px;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  flex-direction: column;
+}
+
+button {
+  /* --bg: #e74c3c; */
+  cursor: pointer;
+  --bg: #E42D25;
+  --text-color: #fff;
+  position: relative;
+  width: 150px;
+  border: none;
+  background: var(--bg);
+  color: var(--text-color);
+  padding: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.2s;
+  border-radius: 5px;
+  opacity: 0.8;
+  letter-spacing: 1px;
+  box-shadow: #c0392b 0px 7px 2px, #000 0px 8px 5px;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+button:active {
+  top: 4px;
+  box-shadow: rgb(95, 28, 21) 0px 3px 2px,#000 0px 3px 5px;
+}
+
+.lead {
+  font-size: 1.2rem;
+  font-weight: 1000;
+color: rgb(74, 74, 74); }
+
+
+.lead2 {
+  font-size: 30px;
+  font-weight: 1000;
+color: rgb(74, 74, 74); }
 
 .title-container img{
     width: 600px;
     height: auto;
     align-self:center;
+    pointer-events: none;
+    user-select: none;
 }
 .button-container {
     margin-bottom: 20px;
@@ -1910,6 +2065,9 @@ body {
 }
 
 .container {
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-wrap: wrap;
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
@@ -1936,7 +2094,6 @@ body {
     margin-left: auto; }
   
   .row {
-    /* width: 110%; */
     display: flex;
     justify-content: space-between; /* Evenly space the books */
     display: -ms-flexbox;
@@ -2018,7 +2175,101 @@ Custom CSS
     -ms-transform: rotatey(-80deg);
     transform: rotatey(-80deg);
   }
-  
+
+
+
+
+
+
+
+.book .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 105%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  font-family: 'Playpen Sans'
+}
+
+.book .tooltiptext::after {
+  font-family: 'Playpen Sans';
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.book:hover .tooltiptext {
+  font-family: 'Playpen Sans';
+  visibility: visible;
+    opacity: 1;
+}
+
+
+.scroll-top {
+  bottom: 20px;
+  opacity:0.8;
+  font-size: 20px;
+  height: 40px;
+  position: fixed;
+  text-align: center;
+  width: 40px;
+  z-index: 10;
+  cursor: pointer;
+  transition: .3s;
+  border-radius: 50%;
+  line-height: 40px;
+  right: -100px;
+  color: #ffffff;
+  background-color: #E42D25; }
+  .scroll-top:hover {
+    background-color: rgb(95, 28, 21);
+    opacity:1;
+    transition: all .4s ease-in-out; }
+  .scroll-top.active {
+    right: 20px; }
+
+
+  /* Large screens, e.g., wide desktops */
+@media (min-width: 1200px) {
+  .book {
+      width: 190px;
+      height: 254px;
+  }
+}
+
+/* Medium screens, e.g., tablets */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .book {
+      width: 200px;
+      height: 267px;
+  }
+}
+
+/* Small screens, e.g., phones */
+@media (max-width: 767px) {
+  .book {
+      width: 150px;
+      height: 200px;
+  }
+}
+
+
+
+
   p {
     font-size: 17px;
     font-weight: bolder;
@@ -2160,3 +2411,9 @@ Custom CSS
   }
   
   /* end loading */
+
+
+  /* .title-container, .container {
+    width: 80%; 
+    text-align: center;
+  } */
