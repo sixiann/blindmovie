@@ -3554,3 +3554,22 @@ p {
   height: 100%;
   /* Take the full height of the parent */
 }
+
+
+#small-screen{
+  display: none;
+}
+
+@media screen and (max-width: 990px) {
+  #small-screen{
+    display: block;
+  }
+
+  #home{
+    display: none;
+  }
+
+  #pick{
+    display: none;
+  }
+}
