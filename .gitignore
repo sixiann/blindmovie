@@ -2,3 +2,4 @@ myenv
 secrets2.py
 .DS_Store
 secrets2.py
+.env

@@ -1,5 +1,16 @@
-# blindmovie
+# Blind Date with a Movie
 
-Ever caught yourself endlessly browsing through Netflix and Amazon Prime, only to be swamped by choices? Hours slip by, the night draws to a close, and you're still stuck without picking a movie? Introducing 'Blind Date with a Movie' – where every movie night is an adventure into the unknown! 
+🍿 Inspired by [Blind Date with a Book](https://blinddatewithabook.org/). It’s like a regular blind date where you don’t know what you’re getting until you get there. But, with movies! 🎥
 
-[https://sixiann.pythonanywhere.com/]
+Blind Date with a Movie is a Flask application that displays some random movies with blind date descriptions. When you click on a description, it reveals a link to the movie. The blind date descriptions are generated using the OpenAI API (GPT-3.5), and the movies are sourced from the TMDB API. 
+
+## Live Demo
+
+Check out the [**live demo**](https://blind-movie.vercel.app/). Netflix and chill?
+
+## Technologies Used
+
+- **Flask**: A lightweight WSGI web application framework in Python
+- **HTML & CSS**: For structuring and styling the web pages
+- [**OpenAI API**](https://platform.openai.com/): Used for generating blind date descriptions
+- [**TMDB API**](https://developer.themoviedb.org/reference/intro/getting-started): Used for fetching movie data
