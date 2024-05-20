@@ -1,25 +1,25 @@
 from flask import Flask
 from flask import render_template
 from flask import request, jsonify
-app = Flask(__name__)
 import json
-from collections import defaultdict
 import random
 import requests
-
-
-
-#for gpt
+from dotenv import load_dotenv
+import os 
 from openai import OpenAI
-import secrets2
 
+load_dotenv()
+app = Flask(__name__)
+moviedb_key = os.environ.get('moviedb_key')
+openai_key = os.environ.get('openai_key')
 
-client = OpenAI(api_key=secrets2.SECRET_KEY)
+client = OpenAI(api_key=openai_key)
 model = "gpt-3.5-turbo"
+
 
 headers = {
     "accept": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYzM5YjYzNmM2MDE5OGE2YWNiZTBkOTE4YzU2MzJjNCIsInN1YiI6IjY1MzMwZjQzNjJlODZmMDBmZGU3YWQ0MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.aXi_0trGhG3FBBADLe3cheyAQanqsFTHsH3TJh5J3Qc"
+    "Authorization": "Bearer " + moviedb_key
 }
 
 
@@ -181,7 +181,6 @@ def get_random_descriptions():
         
     # return blind_descriptions, links
     response = jsonify(blind_descriptions=blind_descriptions, links=links)
-    print(blind_descriptions)
     return response
 
     
