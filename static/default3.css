@@ -107,7 +107,7 @@
 
 .mr-2,
 .mx-2 {
-  font-family: 'Kalnia', serif;
+  font-family: "Kalnia", serif;
   margin-right: 0.5rem !important;
 }
 
@@ -118,9 +118,9 @@
 
 .ml-2,
 .mx-2 {
-  font-family: 'Kalnia', serif;
+  font-family: "Kalnia", serif;
   margin-left: 0.5rem !important;
-  color: #5F1A1F;
+  color: #5f1a1f;
 }
 
 .m-3 {
@@ -2673,7 +2673,6 @@
   padding-left: 15px;
 }
 
-
 .col {
   -ms-flex-preferred-size: 0;
   flex-basis: 0;
@@ -2987,7 +2986,7 @@
 
 .popcorn {
   transition: transform 1s ease;
-    display: inline-block;
+  display: inline-block;
   width: 200px;
 }
 
@@ -2996,14 +2995,13 @@
 }
 
 circle#popcrncirlce {
-  fill: #FFE477;
+  fill: #ffe477;
   transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
-  -webkit-animation: rotate 1.5s cubic-bezier(.49, .05, .32, 1.04) infinite alternate;
-  animation: rotate 1.5s cubic-bezier(.49, .05, .32, 1.04) infinite alternate;
+  -webkit-animation: rotate 1.5s cubic-bezier(0.49, 0.05, 0.32, 1.04) infinite
+    alternate;
+  animation: rotate 1.5s cubic-bezier(0.49, 0.05, 0.32, 1.04) infinite alternate;
 }
-
-
 
 @-webkit-keyframes rotate {
   50% {
@@ -3025,21 +3023,19 @@ circle#popcrncirlce {
 .bg-primary {
   background-color: transparent !important;
   /* background-color: #ffffff; */
-  background-image: url('../static/background3.png');
+  background-image: url("../static/background3.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
 }
 
 .bg-secondary {
   background-color: transparent !important;
   /* background-color: #ffffff; */
-  background-image: url('../static/background4.png');
+  background-image: url("../static/background4.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
 }
 
 .align-items-center {
@@ -3047,13 +3043,10 @@ circle#popcrncirlce {
   align-items: center !important;
 }
 
-
 .align-content-center {
   -ms-flex-line-pack: center !important;
   align-content: center !important;
 }
-
-
 
 section {
   min-height: 100vh;
@@ -3077,13 +3070,6 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #ffffff;
-  background-image: url('../static/curtains.png');
-  background-size: cover;
-  /* Cover the entire space of the body */
-  background-repeat: no-repeat;
-  /* Prevent the image from repeating */
-  background-position: center;
 }
 
 .title-container {
@@ -3096,10 +3082,6 @@ body {
   flex-direction: column;
 }
 
-
-
-
-
 .title-container2 {
   margin-bottom: 150px;
   display: flex;
@@ -3110,13 +3092,12 @@ body {
   flex-direction: column;
 }
 
-
 button {
   cursor: pointer;
-  font-family: 'Kalnia', serif;
+  font-family: "Kalnia", serif;
   color: #2f1208;
   /* --bg: #E42D25; */
-  background-image: url('../static/buttonimg.png'); 
+  background-image: url("../static/buttonimg.png");
   /* background-size:contain; */
   background-size: 100% 100%;
   background-color: transparent;
@@ -3134,7 +3115,7 @@ button {
   border-radius: 5px;
   opacity: 0.8;
   letter-spacing: 1px;
-  box-shadow: #C8A888 0px 7px 2px, #000 0px 8px 5px;
+  box-shadow: #c8a888 0px 7px 2px, #000 0px 8px 5px;
 }
 
 button:hover {
@@ -3147,9 +3128,9 @@ button:active {
 }
 
 .lead {
-  font-family: 'Kalnia', serif;
+  font-family: "Kalnia", serif;
   font-size: 1.2rem;
-  color: #9D3E1E;
+  color: #9d3e1e;
   /* transition: transform 1s ease;
   display: inline-block; */
 }
@@ -3158,30 +3139,25 @@ button:active {
   transform: scale(1.2);
 } */
 
-
-
 .lead2 {
   font-size: 30px;
   font-weight: 1000;
-  color: #5F1A1F;
+  color: #5f1a1f;
 }
 
-
-.logo{
-  margin-top:140px;
-    width: 600px;
-    height: auto;
-    align-self:center;
-    pointer-events: none;
-    user-select: none;
+.logo {
+  margin-top: 140px;
+  width: 600px;
+  height: auto;
+  align-self: center;
+  pointer-events: none;
+  user-select: none;
 }
-
-
 
 .title-container2 .grow img {
   transition: 1s ease;
   width: 300px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
   height: auto;
   align-self: center;
   user-select: none;
@@ -3193,7 +3169,6 @@ button:active {
   -ms-transform: scale(1.2);
   transform: scale(1.2);
   cursor: pointer;
-
 }
 
 /* .title-container img{
@@ -3204,9 +3179,8 @@ button:active {
     user-select: none;
 } */
 
-
 .title-container .grow img {
-  margin-top:10px;
+  margin-top: 10px;
   transition: 1s ease;
   width: 600px;
   height: auto;
@@ -3219,9 +3193,6 @@ button:active {
   -ms-transform: scale(1.2);
   transform: scale(1.2);
 }
-
-
-
 
 .button-container {
   margin-bottom: 20px;
@@ -3309,14 +3280,11 @@ button:active {
   flex-wrap: wrap;
 }
 
-
-
-
 /*****************
 Custom CSS
 *****************/
-.title{
-  font-family: 'Kalnia', serif;
+.title {
+  font-family: "Kalnia", serif;
   font-size: 50px;
 }
 .book {
@@ -3354,11 +3322,10 @@ Custom CSS
   overflow: hidden;
 }
 
-
 .cover {
   top: 0;
   position: absolute;
-  background-color: #FDFAF0;
+  background-color: #fdfaf0;
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -3389,12 +3356,10 @@ Custom CSS
   transform: rotatey(-80deg);
 }
 
-
-
 .tooltip {
   width: 100%;
   height: 10px;
-  background: #FDFAF0;
+  background: #fdfaf0;
   padding: 0.25em;
   text-align: center;
   position: absolute;
@@ -3405,9 +3370,8 @@ Custom CSS
   transform-origin: center top;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
   transition: opacity 0.5s ease-in-out;
-  border: 1px solid rgb(202, 202, 202)
+  border: 1px solid rgb(202, 202, 202);
   /* Add black border */
-
 }
 
 .tooltip::before {
@@ -3460,7 +3424,6 @@ Custom CSS
 }
 
 @keyframes bounce {
-
   0%,
   20%,
   50%,
@@ -3478,10 +3441,6 @@ Custom CSS
   }
 }
 
-
-
-
-
 .scroll-top {
   bottom: 20px;
   opacity: 0.8;
@@ -3492,24 +3451,23 @@ Custom CSS
   width: 40px;
   z-index: 10;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
   border-radius: 50%;
   line-height: 40px;
   right: -100px;
   color: #ffffff;
-  background-color: #BB5735;
+  background-color: #bb5735;
 }
 
 .scroll-top:hover {
-  background-color: #5F1A1F;
+  background-color: #5f1a1f;
   opacity: 1;
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .scroll-top.active {
   right: 20px;
 }
-
 
 /* Large screens, e.g., wide desktops */
 @media (min-width: 1200px) {
@@ -3535,14 +3493,11 @@ Custom CSS
   }
 }
 
-
 p {
   font-size: 17px;
   font-weight: bolder;
-  font-family: 'Kalnia', serif;
+  font-family: "Kalnia", serif;
 }
-
-
 
 #movies-container {
   display: flex;
@@ -3555,21 +3510,20 @@ p {
   /* Take the full height of the parent */
 }
 
-
-#small-screen{
+#small-screen {
   display: none;
 }
 
 @media screen and (max-width: 990px) {
-  #small-screen{
+  #small-screen {
     display: block;
   }
 
-  #home{
+  #home {
     display: none;
   }
 
-  #pick{
+  #pick {
     display: none;
   }
 }
