@@ -187,7 +187,7 @@ def get_random_descriptions():
 
 @app.route('/')
 def home():
-    return render_template('third.html')   
+    return render_template('fourth.html')   
 
 
 if __name__ == '__main__':
