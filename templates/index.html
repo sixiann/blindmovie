@@ -22,9 +22,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kalam&family=Kalnia&display=swap" rel="stylesheet">
 
-    <!--Inter UI font-->
-    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
-
     <!--vendors styles-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
@@ -33,79 +30,21 @@
     <!-- Bootstrap CSS / Color Scheme -->
     <link rel="stylesheet" href="../static/default3.css" id="theme-color">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-
-        function toggleContainers() {
-        // Get the two containers
-        var firstContainer = document.getElementById('first-container');
-        var contentContainer = document.getElementById('content-container');
-
-        firstContainer.style.display = 'none'; // Hide it
-        contentContainer.style.display = 'block'; // Show the contentContainer
-        
-        }
-
-        function getMovies(mainstream) {
-
-            // var bgElement = document.querySelector('.bg-secondary');
-            // if (bgElement) {
-            //     bgElement.style.backgroundImage = 'none';
-            // }
-            document.getElementById('content-container').style.display = 'none';
-            document.getElementById('movies-container').style.display = 'none';
-            document.getElementById('loading-overlay').style.display = 'flex';
-
-            $.ajax({
-                url: '/generate_descriptions?mainstream=' + mainstream,
-                type: 'GET',
-                success: function (response) {
-                    var descriptions = response.blind_descriptions;
-                    var links = response.links;
-                    document.getElementById('content-container').style.display = 'none';
-                    document.getElementById('loading-overlay').style.display = 'none';
-                    document.getElementById('movies-container').style.display = 'flex';
-
-
-                    if (descriptions && descriptions.length === 4 && links && links.length === 4) {
-                        for (var i = 0; i < descriptions.length; i++) {
-                            var card = document.getElementById('card-' + i);
-                            var descriptionElement = card.getElementsByClassName('movie-description')[0]; // Get the p element
-                            descriptionElement.textContent = descriptions[i]; // Update text content
-
-                            // Assuming the card's parent is an anchor tag that should be updated with the link
-                            var anchor = card.closest('a');
-                            if (anchor) {
-                                anchor.href = links[i];
-                                anchor.target = '_blank';
-                            }
-                        }
-                    }
-                },
-                error: function (error) {
-                    document.getElementById('content-container').style.display = 'block';
-                    document.getElementById('loading-overlay').style.display = 'none';
-                    document.getElementById('movies-container').style.display = 'none';
-
-                    console.log('Error:', error);
-                }
-            });
-        }
-
-
-    </script>
 </head>
 
 <body>
+
+    <!-- TODO: implement swiping for smaller screens -->
     <p class="lead p-4" id="small-screen">
         Open on bigger screen, the cards don't fit on small screen. sorryy :(
     </p>
 
+    <!-- landing section -->
     <section class="py-7 py-md-0 bg-primary" id="home">
 
         <div class="title-container">
-            
-            <img class = "logo" src="../static/movielogo4.png" alt="Book Image">
-                
+
+            <img class="logo" src="../static/movielogo4.png" alt="Book Image">
 
             <p class="lead">Can’t pick a movie? I can help.
                 Don't judge a movie by its poster :)
@@ -116,92 +55,44 @@
                     <img src="../static/admitone.png" style="width:200px;">
                 </div>
             </a>
-            
+
         </div>
         </div>
     </section>
 
-
+    <!-- movies section -->
     <section class="py-7 py-md-0 bg-secondary" id="pick">
 
-
-
+        <!-- first container: examples-->
         <div class="title-container2" id="first-container">
             <div class="grow">
-                <img src="../static/givemovies.png" onclick="toggleContainers()">
+                <img src="../static/givemovies.png" id="toggleButton">
             </div>
 
+            <!-- movie examples -->
             <div class="container d-flex justify-content-center">
-                <div class="row">
-    
-                    <div class="mr-3">
-                        <a href="https://www.themoviedb.org/movie/299534-avengers-endgame?language=en-US" target="_blank">
-                            <div class="book">
-                                <img src="https://lumiere-a.akamaihd.net/v1/images/p_avengersendgame_19751_e14a0104.jpeg"
-                                    alt="Book Image">
-                                <div class="cover">
-                                    <p class="ml-2">Surviving heroes unite, rising from ruins to restore universal order
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-    
-                    <div class="mr-3">
-                        <a href="https://www.themoviedb.org/movie/872585-oppenheimer?language=en-US" target="_blank">
-                            <div class="book">
-                                <img src="https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg"
-                                    alt="Book Image">
-                                <div class="cover">
-                                    <p class="ml-2">Cillian Murphy and Emily Blunt depict the tumultuous journey of atomic
-                                        bomb
-                                        creator, J. Robert Oppenheimer.</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-    
-                    <div class="mr-3">
-                        <a href="https://www.themoviedb.org/movie/346698-barbie?language=en-US" target="_blank">
-                            <div class="book">
-                                <img src="https://i.ebayimg.com/images/g/1EcAAOSwa-9klig5/s-l1600.jpg" alt="Book Image">
-                                <div class="cover">
-                                    <p class="ml-2">fantasy world, motherhood, satire, patriarchy</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-    
-                    <div class="mr-3">
-                        <a href="https://www.themoviedb.org/movie/146?language=en-US" target="_blank">
-                            <div class="book">
-                                <img src="https://m.media-amazon.com/images/M/MV5BNDdhMzMxOTctNDMyNS00NTZmLTljNWEtNTc4MDBmZTYxY2NmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg"
-                                    alt="Book Image">
-                                <div class="cover">
-                                    <p class="ml-2">Martial arts adventure unfolds in a whirlwind of love and secrets.</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                <div class="row" id="examples-row">
                 </div>
             </div>
         </div>
 
-        <div class="title-container2" id="content-container" style="display:none">
+        <!-- second container: what are you in the mood for?  -->
+        <div id="content-container" class="title-container2" style="display:none">
             <div class="title-container">
-            <p class="lead2">What are you in the mood for? </p>
-            <div style="flex-direction: row; justify-content: center; margin-top:-10px;">
-                <button onclick="getMovies(1)" class="mr-2" style="width: 190px; height: 60px;">
-                    mainstream
-                </button>
-                <button onclick="getMovies(0)" class="ml-2" style="width: 190px; height: 60px;">
-                    surprise me!
-                </button>
-            </div>
+                <p class="lead2">What are you in the mood for? </p>
+                <div style="flex-direction: row; justify-content: center; margin-top:-10px;">
+                    <button onclick="getMovies(1)" class="mr-2" style="width: 190px; height: 60px;">
+                        mainstream
+                    </button>
+                    <button onclick="getMovies(0)" class="ml-2" style="width: 190px; height: 60px;">
+                        surprise me!
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="title-container" id="loading-overlay" style="display:none">
+        <!-- loading screen after user clicks mainstream/surprise me -->
+        <div id="loading-overlay" class="title-container" style="display:none">
             <div class="popcorn">
                 <svg class="mypopcorn animated fadeIn" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 354.461 354.461"
@@ -291,6 +182,7 @@
         </div>
 
 
+        <!-- final container with blind date descriptions from backend -->
         <div id="movies-container" style="display:none; margin-top:-70px">
 
             <div class="title-container">
@@ -307,77 +199,12 @@
 
 
             <div class="container d-flex justify-content-center">
-                <div class="row">
-                    <div class="mr-3">
-                        <a href="#" target="_blank">
-                            <div class="book">
-                                <div class="tooltip">
-                                    <p>🍿click to reveal🍿</p>
-                                </div>
-                                <img src="https://t4.ftcdn.net/jpg/05/36/94/71/360_F_536947179_8TFyEQV04BmYEWud21q3Znq4jZBlz9qA.jpg"
-                                    alt="?" style="width: 50%; height:50%; opacity: 60%">
-                                <div class="cover" id="card-0">
-                                    <p class="ml-2 movie-description">
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="mr-3">
-                        <a href="#" target="_blank">
-                            <div class="book">
-                                <div class="tooltip">
-                                    <p>🍿click to reveal🍿</p>
-                                </div>
-                                <img src="https://t4.ftcdn.net/jpg/05/36/94/71/360_F_536947179_8TFyEQV04BmYEWud21q3Znq4jZBlz9qA.jpg"
-                                    alt="?" style="width: 50%; height:50%; opacity: 60%">
-                                <div class="cover" id="card-1">
-                                    <p class="ml-2 movie-description">
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="mr-3">
-                        <a href="#" target="_blank">
-                            <div class="book">
-                                <div class="tooltip">
-                                    <p>🍿click to reveal🍿</p>
-                                </div>
-                                <img src="https://t4.ftcdn.net/jpg/05/36/94/71/360_F_536947179_8TFyEQV04BmYEWud21q3Znq4jZBlz9qA.jpg"
-                                    alt="?" style="width: 50%; height:50%; opacity: 60%">
-                                <div class="cover" id="card-2">
-                                    <p class="ml-2 movie-description">
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="mr-3">
-                        <a href="#" target="_blank">
-                            <div class="book">
-                                <div class="tooltip">
-                                    <p>🍿click to reveal🍿</p>
-                                </div>
-                                <img src="https://t4.ftcdn.net/jpg/05/36/94/71/360_F_536947179_8TFyEQV04BmYEWud21q3Znq4jZBlz9qA.jpg"
-                                    alt="?" style="width: 50%; height:50%; opacity: 60%">
-                                <div class="cover" id="card-3">
-                                    <p class="ml-2 movie-description">
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
+                <div class="row" id="blind-date-movies"></div>
             </div>
         </div>
 
-        
-        
+
+
     </section>
 
 
@@ -392,9 +219,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="../static/scripts.js"></script>
+    <script src="../static/addmovies.js"></script>
 
 
-<!-- <a target="_blank" href="https://icons8.com/icon/UazrpxpDJLwg/movie">Movie</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
+    <!-- <a target="_blank" href="https://icons8.com/icon/UazrpxpDJLwg/movie">Movie</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a> -->
 
 </body>
 
