@@ -12,5 +12,22 @@ Check out the [**live demo**](https://blind-movie.vercel.app/). Netflix and chil
 
 - **Flask**: A lightweight WSGI web application framework in Python
 - **HTML & CSS**: For structuring and styling the web pages
+- **jQuery**: A fast, small, and feature-rich JavaScript library
 - [**OpenAI API**](https://platform.openai.com/): Used for generating blind date descriptions
 - [**TMDB API**](https://developer.themoviedb.org/reference/intro/getting-started): Used for fetching movie data
+
+## Installation instructions
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/sixiann/blindmovie.git
+2. Navigate to project directory:
+    ```bash
+    cd blindmovie
+3. Install the required dependencies using pip:
+    ```bash
+    pip install -r requirements.txt
+4. Run the app:
+    ```bash
+    python server.py
+5. Open your web browser and navigate to http://localhost:5000 to view the application.
